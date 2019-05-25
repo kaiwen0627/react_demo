@@ -1,9 +1,10 @@
 import React from "react";
 import { Provider } from "react-redux";
-import Router from "./router";
+import { BrowserRouter as Router } from "react-router-dom";
+
+import RouterConf from "./router";
 import store from "./redux/index";
 
-import { Button } from "antd";
 import "./App.css";
 
 function App() {
@@ -11,8 +12,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <div className="App">
-          <Router />
-          <Button loading={true}>9099</Button>
+          <RouterConf />
         </div>
       </Router>
     </Provider>
