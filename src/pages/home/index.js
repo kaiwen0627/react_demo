@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Layout } from "antd";
 
-import isLogin from '../../component/IsLogin'
 
 import HeadBar from "../../component/HearBar";
 import SideBar from "../../component/SideBar";
@@ -12,8 +11,6 @@ import * as actions from "./action";
 
 import { getBanerList } from "../../tools/api";
 
-// import { Form, Input, Icon, Button, Checkbox, Carousel } from "antd";
-// import { login_phone, login_Email } from "../../tools/api";
 
 import "./index.less";
 
@@ -28,40 +25,33 @@ class Home extends Component {
   }
 
   componentWillMount() {
+    if (!this.props.User_isLogin) {
+      this.props.history.replace('/')
+      return;
+    }
     getBanerList(3).then(data => {
       this.setState({
         banner: data.data.banners
       });
     });
+   
   }
 
-  // componentDidMount () {
 
-  // }
 
-  // componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps) {
+    if (!nextProps.User_isLogin) {
+      this.props.history.replace('/')
+    }
+  }
 
-  // }
 
-  // shouldComponentUpdate (nextProps, nextState) {
 
-  // }
 
-  // componentWillUpdate (nextProps, nextState) {
-
-  // }
-
-  // componentDidUpdate (prevProps, prevState) {
-
-  // }
-
-  // componentWillUnmount () {
-
-  // }
 
   render() {
     return (
-      <div className="loginPage">
+      <div className="Home-Page">
         <Layout>
           <HeadBar />
           <Layout>
@@ -80,10 +70,9 @@ class Home extends Component {
 
 Home.propTypes = {};
 
-// Home = isLogin(Home);
 
 const mapStatetoProps = store => ({
-  userinfo: ""
+  User_isLogin: store.User.isLogin
 });
 
 const mapActionstoProps = dispatch => ({

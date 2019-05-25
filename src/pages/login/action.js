@@ -44,14 +44,11 @@ export const setUserDetailInfo = id => {
 
 export const setUserIsLoginState = () => {
   return async dispatch => {
-    console.log('----------------------------------')
     const data = await getUserLoginState();
 
-    console.log(data);
-   
     dispatch({
       type: SET_USER_DETAIL_INFO,
-      isLogin:data.code
+      isLogin:data.data.code===200
     });
   };
 };

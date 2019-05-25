@@ -15,15 +15,16 @@ class Login extends Component {
     super(props);
   }
 
-  componentWillMount() {
-    if (this.props.userID) {
-      this.props.history.push("/home");
-    }
-  }
+  // componentWillMount() {
+  //   if (this.props.userID) {
+  //     this.props.history.push("/home");
+  //   }
+  // }
 
   componentWillUpdate(nextProps, nextState) {
     if (nextProps.userID) {
-      this.props.actions.setUserDetailInfo(nextProps.userID);
+      // this.props.actions.setUserDetailInfo(nextProps.userID);
+      this.props.actions.setUserIsLoginState()
       this.props.history.push("/home");
     }
   }
@@ -36,7 +37,7 @@ class Login extends Component {
           this.props.actions.userLoninByEmail(values.username, values.password);
         !values.isemail &&
           this.props.actions.userLoninByPhone(values.username, values.password);
-        // this.props.actions.setUserIsLoginState()
+        
       }
     });
   };
