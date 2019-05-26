@@ -40,7 +40,7 @@ class Home extends Component {
 
 
   componentWillReceiveProps (nextProps) {
-    if (!nextProps.User_isLogin) {
+    if (!nextProps.is_Login) {
       this.props.history.replace('/')
     }
   }
@@ -72,7 +72,7 @@ Home.propTypes = {};
 
 
 const mapStatetoProps = store => ({
-  User_isLogin: store.User.isLogin
+  User_isLogin: store.User.code === 200 || false
 });
 
 const mapActionstoProps = dispatch => ({

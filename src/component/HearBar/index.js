@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from "react";
-import {Icon} from 'antd'
+import { connect } from "react-redux";
+import { Icon } from "antd";
 
 import "./index.less";
-import { from } from "_rxjs@6.5.2@rxjs";
-
 class HeadBar extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +25,7 @@ class HeadBar extends Component {
   render() {
     return (
       <div className="head-bar">
-        <Icon type="github" style={{ fontSize: 40,color:'#fff' }} />
+        <Icon type="github" style={{ fontSize: 40, color: "#fff" }} />
         <span className="title">React Music</span>
       </div>
     );
@@ -35,4 +34,6 @@ class HeadBar extends Component {
 
 HeadBar.propTypes = {};
 
-export default HeadBar;
+export default connect(store => ({
+  is_Login: store.isLogin
+}))(HeadBar);

@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { withRouter } from "react-router-dom";
 import * as actions from "./action";
 import { Form, Input, Icon, Button, Checkbox, Carousel } from "antd";
 
@@ -11,21 +10,10 @@ import banner3 from "../../statics/banner3.jpg";
 
 import "./index.less";
 class Login extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  // componentWillMount() {
-  //   if (this.props.userID) {
-  //     this.props.history.push("/home");
-  //   }
-  // }
-
-  componentWillUpdate(nextProps, nextState) {
-    if (nextProps.userID) {
-      // this.props.actions.setUserDetailInfo(nextProps.userID);
-      this.props.actions.setUserIsLoginState()
-      this.props.history.push("/home");
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps.is_Login);
+    if (nextProps.is_Login) {
+      this.props.history.replace("/home");
     }
   }
 
@@ -37,7 +25,6 @@ class Login extends Component {
           this.props.actions.userLoninByEmail(values.username, values.password);
         !values.isemail &&
           this.props.actions.userLoninByPhone(values.username, values.password);
-        
       }
     });
   };
@@ -110,16 +97,14 @@ Login.propTypes = {};
 const WrappedNormalLoginForm = Form.create({ name: "normal_login" })(Login);
 
 const mapStatetoProps = store => ({
-  userID: store.User.id
+  is_Login: store.User.code === 200 || false
 });
 
 const mapActionstoProps = dispatch => ({
   actions: bindActionCreators(actions, dispatch)
 });
 
-export default withRouter(
-  connect(
-    mapStatetoProps,
-    mapActionstoProps
-  )(WrappedNormalLoginForm)
-);
+export default connect(
+  mapStatetoProps,
+  mapActionstoProps
+)(WrappedNormalLoginForm);

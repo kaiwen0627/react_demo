@@ -1,8 +1,7 @@
 import {
   login_phone,
   login_Email,
-  getUserInfo,
-  getUserLoginState
+  getUserInfo
 } from "../../tools/api";
 
 const USER_LOGININ_BY_PHONE = "USER_LOGININ_BY_PHONE";
@@ -13,15 +12,14 @@ export const userLoninByPhone = (phoneNunber, pwd) => {
   return async dispatch => {
     const data = await login_phone(phoneNunber, pwd);
 
-    return {
+    dispatch({
       type: USER_LOGININ_BY_PHONE,
       data
-    };
+    });
   };
 };
 
 export const userLoninByEmail = (email, pwd) => {
-
   return async dispatch => {
     const data = await login_Email(email, pwd);
     dispatch({
@@ -42,13 +40,3 @@ export const setUserDetailInfo = id => {
   };
 };
 
-export const setUserIsLoginState = () => {
-  return async dispatch => {
-    const data = await getUserLoginState();
-
-    dispatch({
-      type: SET_USER_DETAIL_INFO,
-      isLogin:data.data.code===200
-    });
-  };
-};
