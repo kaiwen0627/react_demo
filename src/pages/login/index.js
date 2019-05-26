@@ -97,7 +97,7 @@ Login.propTypes = {};
 const WrappedNormalLoginForm = Form.create({ name: "normal_login" })(Login);
 
 const mapStatetoProps = store => ({
-  is_Login: store.User.code === 200 || false
+  is_Login: store.Login.islogin || false,
 });
 
 const mapActionstoProps = dispatch => ({

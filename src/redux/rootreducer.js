@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
 
-import User from '../pages/login/reducer'
+import Login from '../pages/login/reducer'
+import UserInfo from '../pages/home/reducer'
 
 const rootreducer = combineReducers({
-  User
+  Login,
+  UserInfo
 });
 
 export { rootreducer };
