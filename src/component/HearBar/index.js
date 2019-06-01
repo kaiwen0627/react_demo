@@ -1,8 +1,11 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
-import { Icon } from "antd";
+import { bindActionCreators } from "redux";
+import { Icon, Avatar, Popover, Button } from "antd";
+import { userLogout } from "../../pages/login/action";
 
 import "./index.less";
+
 class HeadBar extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +13,9 @@ class HeadBar extends Component {
 
   componentWillMount() {}
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.log(this.props);
+  }
 
   componentWillReceiveProps(nextProps) {}
 
@@ -22,11 +27,37 @@ class HeadBar extends Component {
 
   componentWillUnmount() {}
 
+  logout = () => {
+    console.log(this.props);
+    this.props.userLogout();
+    // localStorage.removeItem('persist:root')
+  };
+
   render() {
+    const content = (
+      <div className="grxx">
+        <p>昵称：{this.props.user_info_snickname}</p>
+        <p>等级：{this.props.user_info_level}</p>
+        <p>签名：{this.props.user_info_signature}</p>
+      </div>
+    );
     return (
       <div className="head-bar">
-        <Icon type="github" style={{ fontSize: 40, color: "#fff" }} />
-        <span className="title">React Music</span>
+        <div className="left">
+          <Icon type="github" style={{ fontSize: 40, color: "#fff" }} />
+          <span className="title">React Music</span>
+        </div>
+        <div className="right">
+          <Popover
+            content={content}
+            title="个人信息"
+            trigger="click"
+            placement="bottom"
+          >
+            <Avatar src={this.props.user_info_img} />
+          </Popover>
+          <Button className="logout-btn" onClick={this.logout} icon="poweroff" ghost>退出</Button>
+        </div>
       </div>
     );
   }
@@ -34,6 +65,19 @@ class HeadBar extends Component {
 
 HeadBar.propTypes = {};
 
-export default connect(store => ({
-  is_Login: store.isLogin
-}))(HeadBar);
+const mapStatetoProps = store => ({
+  is_Login: store.Login.islogin || false,
+  user_info_img: store.UserInfo.profile.avatarUrl || "",
+  user_info_level: store.UserInfo.level || "",
+  user_info_signature: store.UserInfo.profile.signature || "",
+  user_info_snickname: store.UserInfo.profile.nickname || ""
+});
+
+const mapActionstoProps = dispatch => ({
+  userLogout: bindActionCreators(userLogout, dispatch)
+});
+
+export default connect(
+  mapStatetoProps,
+  mapActionstoProps
+)(HeadBar);

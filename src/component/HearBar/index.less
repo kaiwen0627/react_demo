@@ -1,5 +1,25 @@
 .head-bar{
-  height: 60px;
+  height: 6rem;
   background-color: #900;
   width: 100%;
+  justify-content: space-around;
+  .left,.right{
+    display: flex;
+    flex: 1;
+  }
+  .left{
+    align-self: flex-start;
+  }
+  .right{
+    justify-content: flex-end;
+    padding-right: 40px;
+    align-self: center;
+    .logout-btn{
+      margin-left: 30px;
+    }
+  }
+ 
 }
+.grxx{
+  max-width: 300px;
+} 

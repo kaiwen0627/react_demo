@@ -58,6 +58,7 @@ class Home extends Component {
               <SideBar />
             </Sider>
             <Content>
+              
               {this.state.banner.length && <Banner list={this.state.banner} />}
             </Content>
           </Layout>

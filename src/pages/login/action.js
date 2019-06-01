@@ -1,12 +1,14 @@
 import {
   login_phone,
   login_Email,
-  getUserInfo
+  getUserInfo,
+  logout
 } from "../../tools/api";
 
 const USER_LOGININ_BY_PHONE = "USER_LOGININ_BY_PHONE";
 const USER_LOGININ_BY_EMAIL = "USER_LOGININ_BY_EMAIL";
 const SET_USER_DETAIL_INFO = "SET_USER_DETAIL_INFO";
+const USER_LOGOUT = "USER_LOGOUT";
 
 export const userLoninByPhone = (phoneNunber, pwd) => {
   return async dispatch => {
@@ -40,3 +42,12 @@ export const setUserDetailInfo = id => {
   };
 };
 
+export const userLogout = () => {
+  return async dispatch => {
+    const data = await logout();
+    dispatch({
+      type: USER_LOGOUT,
+      data:data
+    })
+  }
+}

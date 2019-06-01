@@ -39,3 +39,7 @@ export const getBanerList = type => {
 export const getUserLoginState = () => {
   return getDate.get("/login/status");
 };
+
+export const logout = () => {
+  return getDate.get("/logout")
+}

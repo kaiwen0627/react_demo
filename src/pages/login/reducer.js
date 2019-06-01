@@ -16,6 +16,14 @@ export default (state = {}, actions) => {
           userID: actions.data.data.account.id
         }
       };
+      case "USER_LOGOUT":
+        return {
+          ...state,
+          ...{
+            islogin: false,
+            
+          }
+        };
     default:
       return state;
   }
