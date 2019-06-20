@@ -56,7 +56,14 @@ class HeadBar extends Component {
           >
             <Avatar src={this.props.user_info_img} />
           </Popover>
-          <Button className="logout-btn" onClick={this.logout} icon="poweroff" ghost>退出</Button>
+          <Button
+            className="logout-btn"
+            onClick={this.logout}
+            icon="poweroff"
+            ghost
+          >
+            退出
+          </Button>
         </div>
       </div>
     );
@@ -65,13 +72,25 @@ class HeadBar extends Component {
 
 HeadBar.propTypes = {};
 
-const mapStatetoProps = store => ({
-  is_Login: store.Login.islogin || false,
-  user_info_img: store.UserInfo.profile.avatarUrl || "",
-  user_info_level: store.UserInfo.level || "",
-  user_info_signature: store.UserInfo.profile.signature || "",
-  user_info_snickname: store.UserInfo.profile.nickname || ""
-});
+const mapStatetoProps = store => {
+  if (store.Login.islogin && !!store.UserInfo.profile) {
+    return {
+      is_Login: store.Login.islogin,
+      user_info_img: store.UserInfo.profile.avatarUrl,
+      user_info_level: store.UserInfo.level,
+      user_info_signature: store.UserInfo.profile.signature,
+      user_info_snickname: store.UserInfo.profile.nickname
+    };
+  } else {
+    return {
+      is_Login: false,
+      user_info_img: "",
+      user_info_level: "",
+      user_info_signature: "",
+      user_info_snickname: ""
+    };
+  }
+};
 
 const mapActionstoProps = dispatch => ({
   userLogout: bindActionCreators(userLogout, dispatch)

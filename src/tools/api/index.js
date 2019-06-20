@@ -40,6 +40,10 @@ export const getUserLoginState = () => {
   return getDate.get("/login/status");
 };
 
+/**
+ * 用户退出
+ */
 export const logout = () => {
   return getDate.get("/logout")
 }
+
